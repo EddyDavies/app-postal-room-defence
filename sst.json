@@ -1,0 +1,5 @@
+{
+  "name": "postal-room-defence",
+  "region": "eu-west-2",
+  "main": "stacks/index.ts"
+}
