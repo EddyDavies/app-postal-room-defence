@@ -14,23 +14,19 @@ const appRouter = t.router({
 export type AppRouter = typeof appRouter;
 
 import { 
-    CreateAWSLambdaContextOptions, awsLambdaRequestHandler 
+  CreateAWSLambdaContextOptions, awsLambdaRequestHandler 
 } from '@trpc/server/adapters/aws-lambda';
+import { APIGatewayProxyEventV2 } from 'aws-lambda';
 
+
+// created for each request
+const createContext = ({
+    event,
+    context,
+}: CreateAWSLambdaContextOptions<APIGatewayProxyEventV2>) => ({}) // no context
+// type Context =   t.inferAsyncReturnType<typeof createContext>;
+  
 export const handler = awsLambdaRequestHandler({
-    router: appRouter
-})
-
-
-// // created for each request
-// const createContext = ({
-//     event,
-//     context,
-//   }: CreateAWSLambdaContextOptions<APIGatewayProxyEventV2>) => ({}) // no context
-//   type Context =   .inferAsyncReturnType<typeof createContext>;
-  
-//   export const handler = awsLambdaRequestHandler({
-//     router: appRouter,
-//     createContext,
-//   });
-  
+  router: appRouter,
+  createContext: createContext,
+});
