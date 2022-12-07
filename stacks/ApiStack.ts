@@ -15,7 +15,7 @@ export function ApiStack({ stack }: StackContext) {
       },
     },
     routes: {
-      "POST /parcel": "functions/lambda.main",
+      "GET /parcel": "functions/lambda.main",
       "ANY /trpc/{proxy+}": "functions/trpc.handler"
     },
   });
